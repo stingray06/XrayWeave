@@ -13,19 +13,19 @@ public struct User: Encodable, XrayParsable {
     }
 
     public let id: String
-    public let flow: Flow
+    //public let flow: Flow
     public let encryption: String = "none"
-    public let level: Int = 0
+   // public let level: Int = 0
 
     init(_ parser: XrayWeave) throws {
-        let flow = try Self.getFlow(parser.parametersMap)
+      //  let flow = try Self.getFlow(parser.parametersMap)
         id = parser.userID
-        self.flow = flow
+       // self.flow = flow
     }
 
-    public init(id: String, flow: Flow) {
+    public init(id: String) {
         self.id = id
-        self.flow = flow
+        //self.flow = flow
     }
 
     private static func getFlow(_ map: [String: String]) throws -> User.Flow {
