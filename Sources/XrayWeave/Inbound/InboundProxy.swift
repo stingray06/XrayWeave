@@ -26,7 +26,7 @@ public struct InboundProxy: Encodable {
         }
     }
 
-    let type: String
+    let type: String?
 
     /// Listening address, IP address or Unix domain socket, the default value is "0.0.0.0", which means accepting connections on all network cards.
     let listen: String
@@ -47,7 +47,7 @@ public struct InboundProxy: Encodable {
     let sniffing: Sniffing
 
     public init(
-        type: String = "tun",
+        type: String? = "tun",
         listen: String = "127.0.0.1",
         port: Int = 443,
         `protocol`: InboundProtocol = .socks,
