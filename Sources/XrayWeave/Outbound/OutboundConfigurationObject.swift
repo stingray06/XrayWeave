@@ -8,6 +8,7 @@ public enum OutboundConfigurationObject: Encodable, XrayParsable {
     case vless(VlessOutboundConfigurationObject)
     case vmess(VmessOutboundConfigurationObject)
     case shadowsocks(ShadowsocksOutboundConfigurationObject)
+    case trojan(TrojanOutboundConfigurationObject)
 
     init(_ parser: XrayWeave) throws {
         switch parser.outboundProtocol {
@@ -17,6 +18,8 @@ public enum OutboundConfigurationObject: Encodable, XrayParsable {
             self = .vmess(try VmessOutboundConfigurationObject(parser))
         case .shadowsocks:
             self = .shadowsocks(try ShadowsocksOutboundConfigurationObject(parser))
+        case .trojan:
+            self = .trojan(try TrojanOutboundConfigurationObject(parser))
         case .freedom:
             throw NSError.newError("Fix me 🥲")
         default:
@@ -32,6 +35,8 @@ public enum OutboundConfigurationObject: Encodable, XrayParsable {
         case .vmess(let object):
             try container.encode(["vnext": [object]])
         case .shadowsocks(let object):
+            try container.encode(["servers": object.servers])
+        case .trojan(let object):
             try container.encode(["servers": object.servers])
         }
     }

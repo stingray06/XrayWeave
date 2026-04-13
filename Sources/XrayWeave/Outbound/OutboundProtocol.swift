@@ -7,5 +7,6 @@ public enum OutboundProtocol: String, Encodable {
     case freedom
     case vmess
     case shadowsocks
+    case trojan
     
 }
